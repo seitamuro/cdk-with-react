@@ -1,16 +1,34 @@
 import * as cdk from 'aws-cdk-lib';
+import * as apigwv2 from 'aws-cdk-lib/aws-apigatewayv2';
+import * as apigwv2_integrations from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import * as aws_lambda_nodejs from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class CdkStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const api = new apigwv2.HttpApi(this, 'Api', {
+      corsPreflight: {
+        allowOrigins: ['*'],
+        allowMethods: [apigwv2.CorsHttpMethod.GET],
+      }
+    });
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'CdkQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    const helloLambda = new aws_lambda_nodejs.NodejsFunction(this, 'HelloLambda', {
+      entry: 'lambda/hello.ts',
+    });
+
+    api.addRoutes({
+      path: '/hello',
+      methods: [ apigwv2.HttpMethod.GET ],
+      integration: new apigwv2_integrations.HttpLambdaIntegration("HelloIntegration",
+        helloLambda,
+      ),
+    })
+
+    new cdk.CfnOutput(this, 'ApiEndpoint', {
+      value: api.url!,
+    });
   }
 }

@@ -1,10 +1,22 @@
-import { useState } from 'react'
+import axios from "axios"
+import { useEffect, useState } from 'react'
+import './App.css'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
-import './App.css'
+
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_ENDPOINT
+})
 
 function App() {
   const [count, setCount] = useState(0)
+  const [message, setMessage] = useState('')
+
+  useEffect(() => {
+    api.get('/hello').then((res) => {
+      setMessage(res.data.message)
+    })
+  })
 
   return (
     <>
@@ -27,6 +39,9 @@ function App() {
       </div>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
+      </p>
+      <p>
+        This is <code>/hello</code> response: {message}
       </p>
     </>
   )
