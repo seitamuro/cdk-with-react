@@ -1,22 +1,12 @@
-import axios from "axios"
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import reactLogo from './assets/react.svg'
+import { useHello } from './hook/useHello'
 import viteLogo from '/vite.svg'
-
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_ENDPOINT
-})
 
 function App() {
   const [count, setCount] = useState(0)
-  const [message, setMessage] = useState('')
-
-  useEffect(() => {
-    api.get('/hello').then((res) => {
-      setMessage(res.data.message)
-    })
-  })
+  const { data: message } = useHello()
 
   return (
     <>

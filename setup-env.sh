@@ -2,7 +2,7 @@
 
 set -eu
 
-STACK_NAME="CdkStack"
+STACK_NAME="WebApplicationStack"
 
 function extract_value {
   echo $1 | jq -r ".Stacks[0].Outputs[] | select(.OutputKey==\"$2\") | .OutputValue"

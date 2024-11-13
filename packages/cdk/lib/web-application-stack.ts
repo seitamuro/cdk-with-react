@@ -13,10 +13,10 @@ export class WebApplicationStack extends Stack {
       apiEndpointUrl: api.api.apiEndpoint
     });
 
-    new CfnOutput(this, 'WebUI', {
+    new CfnOutput(this, 'WebUi', {
       value: web.destinationBucket.bucketWebsiteUrl
     })
-    new CfnOutput(this, 'ApiEndpointOutput', {
+    new CfnOutput(this, 'ApiEndpoint', {
       value: api.api.apiEndpoint
     })
   }
