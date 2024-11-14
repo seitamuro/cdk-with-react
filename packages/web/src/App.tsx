@@ -2,11 +2,13 @@ import { useState } from 'react'
 import './App.css'
 import reactLogo from './assets/react.svg'
 import { useHello } from './hook/useHello'
+import { useTime } from './hook/useTime'
 import viteLogo from '/vite.svg'
 
 function App() {
   const [count, setCount] = useState(0)
   const { data: message } = useHello()
+  const { data: time } = useTime()
 
   return (
     <>
@@ -32,6 +34,9 @@ function App() {
       </p>
       <p>
         This is <code>/hello</code> response: {message}
+      </p>
+      <p>
+        <code>/time</code>: {time}
       </p>
     </>
   )

@@ -29,5 +29,17 @@ export class Api extends Construct {
         helloLambda,
       ),
     })
+
+    const timeLambda = new aws_lambda_nodejs.NodejsFunction(this, 'TimeLambda', {
+      entry: 'lambda/time.ts',
+    });
+
+    this.api.addRoutes({
+      path: '/time',
+      methods: [ apigwv2.HttpMethod.GET ],
+      integration: new apigwv2_integrations.HttpLambdaIntegration("TimeIntegration",
+        timeLambda,
+      ), 
+    })
   }
 }
