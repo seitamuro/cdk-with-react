@@ -5,6 +5,7 @@
   "singleQuote": true,
   "bracketSpacing": true,
   "bracketSameLine": true,
+  "htmlWhitespaceSensitivity": "css",
   "arrowParens": "always",
   "plugins": ["prettier-plugin-tailwindcss"]
 }
