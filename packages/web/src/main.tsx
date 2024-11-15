@@ -7,6 +7,7 @@ import { routes } from './routes.tsx'
 
 import "@aws-amplify/ui-react/styles.css"
 
+import { Header } from './components/Header.tsx'
 import './index.css'
 
 const router = createBrowserRouter(routes)
@@ -25,9 +26,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Authenticator.Provider>
       <Authenticator>
-        <div>
-          <h1 style={{ backgroundColor: "#aaaaaa", margin: 0 }}>My App</h1>
-        </div>
+        <Header />
         <RouterProvider router={router} />
       </Authenticator>
     </Authenticator.Provider>
