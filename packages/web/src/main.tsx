@@ -3,8 +3,11 @@ import { Amplify } from 'aws-amplify'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import './index.css'
 import { routes } from './routes.tsx'
+
+import "@aws-amplify/ui-react/styles.css"
+
+import './index.css'
 
 const router = createBrowserRouter(routes)
 
@@ -22,6 +25,9 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <Authenticator.Provider>
       <Authenticator>
+        <div>
+          <h1 style={{ backgroundColor: "#aaaaaa", margin: 0 }}>My App</h1>
+        </div>
         <RouterProvider router={router} />
       </Authenticator>
     </Authenticator.Provider>

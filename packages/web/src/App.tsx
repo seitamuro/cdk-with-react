@@ -6,7 +6,6 @@ import { useTime } from './hook/useTime'
 import viteLogo from '/vite.svg'
 
 
-import "@aws-amplify/ui-react/styles.css"
 import { signOut } from 'aws-amplify/auth'
 import { useUserData } from './hook/useUserData'
 
